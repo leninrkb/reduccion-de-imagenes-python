@@ -9,23 +9,27 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QPixmap
+# import cv2
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1098, 505)
-        MainWindow.setStyleSheet("QMainWindow{\n"
-"    background-color: rgb(26, 95, 180);\n"
-"}")
+        MainWindow.setStyleSheet(
+            "QMainWindow{\n" "    background-color: rgb(26, 95, 180);\n" "}"
+        )
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setAutoFillBackground(False)
-        self.centralwidget.setStyleSheet("QWidget{\n"
-"    \n"
-"    \n"
-"    background-color: rgb(33, 33, 33);\n"
-"    background-color: rgb(58, 58, 58);\n"
-"}")
+        self.centralwidget.setStyleSheet(
+            "QWidget{\n"
+            "    \n"
+            "    \n"
+            "    background-color: rgb(33, 33, 33);\n"
+            "    background-color: rgb(58, 58, 58);\n"
+            "}"
+        )
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setContentsMargins(5, 5, 5, 5)
@@ -59,11 +63,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.frame_img = QtWidgets.QFrame(self.frame_4)
-        self.frame_img.setStyleSheet("QFrame{\n"
-"    border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"}")
+        self.frame_img.setStyleSheet(
+            "QFrame{\n"
+            "    border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "}"
+        )
         self.frame_img.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_img.setFrameShadow(QtWidgets.QFrame.Plain)
         self.frame_img.setLineWidth(1)
@@ -75,9 +81,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.label_img_original)
         self.verticalLayout_3.addWidget(self.frame_img)
         self.pushButton_cargar_img = QtWidgets.QPushButton(self.frame_4)
-        self.pushButton_cargar_img.setStyleSheet("QPushButton{\n"
-"color: rgb(255, 255, 255);\n"
-"}")
+        self.pushButton_cargar_img.setStyleSheet(
+            "QPushButton{\n" "color: rgb(255, 255, 255);\n" "}"
+        )
         self.pushButton_cargar_img.setObjectName("pushButton_cargar_img")
         self.verticalLayout_3.addWidget(self.pushButton_cargar_img)
         self.horizontalLayout_2.addWidget(self.frame_4)
@@ -89,17 +95,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.label = QtWidgets.QLabel(self.frame_5)
-        self.label.setStyleSheet("QLabel{\n"
-"    color: rgb(255, 255, 255);\n"
-"}")
+        self.label.setStyleSheet("QLabel{\n" "    color: rgb(255, 255, 255);\n" "}")
         self.label.setObjectName("label")
         self.verticalLayout_4.addWidget(self.label)
         self.frame_preview_reduccion = QtWidgets.QFrame(self.frame_5)
-        self.frame_preview_reduccion.setStyleSheet("QFrame{\n"
-"    border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"}")
+        self.frame_preview_reduccion.setStyleSheet(
+            "QFrame{\n"
+            "    border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "}"
+        )
         self.frame_preview_reduccion.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_preview_reduccion.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_preview_reduccion.setObjectName("frame_preview_reduccion")
@@ -117,41 +123,37 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setContentsMargins(2, 2, 2, 2)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.frame_6 = QtWidgets.QFrame(self.frame_3)
-        self.frame_6.setStyleSheet("QFrame{\n"
-"        border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"}")
+        self.frame_6.setStyleSheet(
+            "QFrame{\n"
+            "        border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "}"
+        )
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_6.setObjectName("frame_6")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.frame_6)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.label_2 = QtWidgets.QLabel(self.frame_6)
-        self.label_2.setStyleSheet("QLabel{\n"
-"    color: rgb(255, 255, 255);\n"
-"    border: none; \n"
-"}")
+        self.label_2.setStyleSheet(
+            "QLabel{\n" "    color: rgb(255, 255, 255);\n" "    border: none; \n" "}"
+        )
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_3.addWidget(self.label_2)
         self.spinBox = QtWidgets.QSpinBox(self.frame_6)
-        self.spinBox.setStyleSheet("QSpinBox{\n"
-"color: rgb(255, 255, 255);\n"
-"}")
+        self.spinBox.setStyleSheet("QSpinBox{\n" "color: rgb(255, 255, 255);\n" "}")
         self.spinBox.setMinimum(2)
         self.spinBox.setObjectName("spinBox")
         self.horizontalLayout_3.addWidget(self.spinBox)
         self.label_4 = QtWidgets.QLabel(self.frame_6)
-        self.label_4.setStyleSheet("QLabel{\n"
-"    color: rgb(255, 255, 255);\n"
-"    border: none; \n"
-"}")
+        self.label_4.setStyleSheet(
+            "QLabel{\n" "    color: rgb(255, 255, 255);\n" "    border: none; \n" "}"
+        )
         self.label_4.setObjectName("label_4")
         self.horizontalLayout_3.addWidget(self.label_4)
         self.spinBox_2 = QtWidgets.QSpinBox(self.frame_6)
-        self.spinBox_2.setStyleSheet("QSpinBox{\n"
-"color: rgb(255, 255, 255);\n"
-"}")
+        self.spinBox_2.setStyleSheet("QSpinBox{\n" "color: rgb(255, 255, 255);\n" "}")
         self.spinBox_2.setMinimum(2)
         self.spinBox_2.setObjectName("spinBox_2")
         self.horizontalLayout_3.addWidget(self.spinBox_2)
@@ -161,11 +163,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setStretch(3, 2)
         self.horizontalLayout_5.addWidget(self.frame_6)
         self.frame_7 = QtWidgets.QFrame(self.frame_3)
-        self.frame_7.setStyleSheet("QFrame{\n"
-"        border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"}")
+        self.frame_7.setStyleSheet(
+            "QFrame{\n"
+            "        border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "}"
+        )
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
@@ -173,16 +177,16 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.pushButton_ver_marco = QtWidgets.QPushButton(self.frame_7)
         self.pushButton_ver_marco.setEnabled(False)
-        self.pushButton_ver_marco.setStyleSheet("QPushButton{\n"
-"color: rgb(255, 255, 255);\n"
-"}")
+        self.pushButton_ver_marco.setStyleSheet(
+            "QPushButton{\n" "color: rgb(255, 255, 255);\n" "}"
+        )
         self.pushButton_ver_marco.setObjectName("pushButton_ver_marco")
         self.horizontalLayout_4.addWidget(self.pushButton_ver_marco)
         self.pushButton_aplicar_reduccion = QtWidgets.QPushButton(self.frame_7)
         self.pushButton_aplicar_reduccion.setEnabled(False)
-        self.pushButton_aplicar_reduccion.setStyleSheet("QPushButton{\n"
-"color: rgb(255, 255, 255);\n"
-"}")
+        self.pushButton_aplicar_reduccion.setStyleSheet(
+            "QPushButton{\n" "color: rgb(255, 255, 255);\n" "}"
+        )
         self.pushButton_aplicar_reduccion.setObjectName("pushButton_aplicar_reduccion")
         self.horizontalLayout_4.addWidget(self.pushButton_aplicar_reduccion)
         self.horizontalLayout_5.addWidget(self.frame_7)
@@ -200,11 +204,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.frame_8 = QtWidgets.QFrame(self.frame_resultado)
-        self.frame_8.setStyleSheet("QFrame{\n"
-"        border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"}")
+        self.frame_8.setStyleSheet(
+            "QFrame{\n"
+            "        border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "}"
+        )
         self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_8.setObjectName("frame_8")
@@ -222,31 +228,37 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.frame_10 = QtWidgets.QFrame(self.frame_9)
-        self.frame_10.setStyleSheet("QFrame{\n"
-"        border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"}")
+        self.frame_10.setStyleSheet(
+            "QFrame{\n"
+            "        border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "}"
+        )
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
         self.verticalLayout_6.addWidget(self.frame_10)
         self.lineEdit_ruta_guardar = QtWidgets.QLineEdit(self.frame_9)
-        self.lineEdit_ruta_guardar.setStyleSheet("QLineEdit{\n"
-"color:rgb(255, 255, 255);\n"
-"    border: 1px solid; \n"
-"    border-color: gray;\n"
-"    border-radius: 8px;\n"
-"\n"
-"}")
+        self.lineEdit_ruta_guardar.setStyleSheet(
+            "QLineEdit{\n"
+            "color:rgb(255, 255, 255);\n"
+            "    border: 1px solid; \n"
+            "    border-color: gray;\n"
+            "    border-radius: 8px;\n"
+            "\n"
+            "}"
+        )
         self.lineEdit_ruta_guardar.setObjectName("lineEdit_ruta_guardar")
         self.verticalLayout_6.addWidget(self.lineEdit_ruta_guardar)
         self.pushButton_descargar_nuevaimg = QtWidgets.QPushButton(self.frame_9)
         self.pushButton_descargar_nuevaimg.setEnabled(False)
-        self.pushButton_descargar_nuevaimg.setStyleSheet("QPushButton{\n"
-"color: rgb(255, 255, 255);\n"
-"}")
-        self.pushButton_descargar_nuevaimg.setObjectName("pushButton_descargar_nuevaimg")
+        self.pushButton_descargar_nuevaimg.setStyleSheet(
+            "QPushButton{\n" "color: rgb(255, 255, 255);\n" "}"
+        )
+        self.pushButton_descargar_nuevaimg.setObjectName(
+            "pushButton_descargar_nuevaimg"
+        )
         self.verticalLayout_6.addWidget(self.pushButton_descargar_nuevaimg)
         self.verticalLayout_5.addWidget(self.frame_9)
         self.verticalLayout_5.setStretch(0, 4)
@@ -269,16 +281,39 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Alto"))
         self.label_4.setText(_translate("MainWindow", "Ancho"))
         self.pushButton_ver_marco.setText(_translate("MainWindow", "Ver marco"))
-        self.pushButton_aplicar_reduccion.setText(_translate("MainWindow", "Aplicar reduccion"))
+        self.pushButton_aplicar_reduccion.setText(
+            _translate("MainWindow", "Aplicar reduccion")
+        )
         self.label_img_resultante.setText(_translate("MainWindow", "TextLabel"))
-        self.pushButton_descargar_nuevaimg.setText(_translate("MainWindow", "Descargar nueva imagen"))
+        self.pushButton_descargar_nuevaimg.setText(
+            _translate("MainWindow", "Descargar nueva imagen")
+        )
 
+    def leer_img(self, ruta):
+        img = QPixmap(ruta)
+        self.label_img_original.setPixmap(img)
+        label_width = self.label_img_original.width()
+        img = img.scaledToWidth(label_width)
+        self.label_img_original.setPixmap(img)
+
+    def seleccionar_archivo(self):
+        archivo = QFileDialog()
+        archivo.setWindowTitle("Seleccionar imagen")
+        archivo.setFileMode(QFileDialog.ExistingFile)
+        if archivo.exec_():
+            ruta = archivo.selectedFiles()
+            self.leer_img(ruta[0])
+
+    def conectar_metodos(self):
+        self.pushButton_cargar_img.clicked.connect(self.seleccionar_archivo)
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    ui.conectar_metodos()
     MainWindow.show()
     sys.exit(app.exec_())
