@@ -335,6 +335,9 @@ color: rgb(255, 255, 255);
                <layout class="QHBoxLayout" name="horizontalLayout_4">
                 <item>
                  <widget class="QPushButton" name="pushButton_ver_marco">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
 color: rgb(255, 255, 255);
@@ -347,6 +350,9 @@ color: rgb(255, 255, 255);
                 </item>
                 <item>
                  <widget class="QPushButton" name="pushButton_aplicar_reduccion">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="styleSheet">
                    <string notr="true">QPushButton{
 color: rgb(255, 255, 255);
@@ -466,6 +472,9 @@ color:rgb(255, 255, 255);
              </item>
              <item>
               <widget class="QPushButton" name="pushButton_descargar_nuevaimg">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="styleSheet">
                 <string notr="true">QPushButton{
 color: rgb(255, 255, 255);
