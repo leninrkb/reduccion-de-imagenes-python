@@ -56,22 +56,13 @@ class VentanaPrincipal(QMainWindow):
 
     def reducir_matriz(self,canal, alto_original, ancho_original, alto, ancho):
         nuevaimg = []
-        if self.radioButton_media.isChecked():
-            for i in range(0, alto_original - alto + 1, alto):
-                fila = []
-                for j in range(0, ancho_original - ancho + 1, ancho):
-                    pixels = canal[i:i + alto, j:j + ancho]
-                    pixel = np.mean(pixels)
-                    fila.append(pixel)
-                nuevaimg.append(fila)
-        else:
-            for i in range(0, alto_original - alto + 1, alto):
-                fila = []
-                for j in range(0, ancho_original - ancho + 1, ancho):
-                    pixels = canal[i:i + alto, j:j + ancho]
-                    pixel = np.median(pixels)
-                    fila.append(pixel)
-                nuevaimg.append(fila)
+        for i in range(0, alto_original - alto + 1, alto):
+            fila = []
+            for j in range(0, ancho_original - ancho + 1, ancho):
+                pixels = canal[i:i + alto, j:j + ancho]
+                pixel = np.mean(pixels) if self.radioButton_media.isChecked() else np.median(pixels)
+                fila.append(pixel)
+            nuevaimg.append(fila)
         nuevaimg = np.array(nuevaimg)
         nuevaimg = nuevaimg.astype(np.uint8)
         return nuevaimg
@@ -82,7 +73,7 @@ class VentanaPrincipal(QMainWindow):
             archivo = directorio+f'/{int(time.time())}_img.jpg'
             img = cv2.cvtColor(self.img_resultante, cv2.COLOR_BGR2RGB)
             cv2.imwrite(archivo,img)
-            print(archivo)
+            self.label_procesando.setText(f'imagen descargada en {directorio}')
 
     def ajustar_imagen_resultante(self):
         pixmap_aux = self.pixmap_resultante
