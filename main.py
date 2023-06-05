@@ -13,7 +13,18 @@ class VentanaPrincipal(QMainWindow):
         self.pushButton_ver_marco.clicked.connect(self.ver_marco_reduccion)
         self.pushButton_cargar_img.clicked.connect(self.seleccionar_archivo)
         self.pushButton_aplicar_reduccion.clicked.connect(self.aplicar_cambios)
-        self.label_procesando.setText('')
+        self.spinBox_ancho.valueChanged.connect(self.cambio_spin)
+        self.spinBox_alto.valueChanged.connect(self.cambio_spin)
+        self.label_procesando.setText('sin procesos')
+
+    def cambio_spin(self):
+            self.label_marco.clear()
+            self.label_img_resultante.clear()
+            self.pushButton_aplicar_reduccion.setEnabled(False)
+            self.pushButton_descargar_nuevaimg.setEnabled(False)
+            self.label_procesando.setText('sin procesos')
+
+
     def extraer_marco(self, alto, ancho, maxancho, maxalto):
         print(alto, ancho, maxancho, maxalto)
         imagen = self.imgcv[0:alto,0:ancho]
