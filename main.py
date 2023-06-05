@@ -10,6 +10,7 @@ class VentanaPrincipal(QMainWindow):
         uic.loadUi('gui_main.ui', self) 
         self.pushButton_ver_marco.clicked.connect(self.ver_marco_reduccion)
         self.pushButton_cargar_img.clicked.connect(self.seleccionar_archivo)
+        self.pushButton_aplicar_reduccion.clicked.connect(self.aplicar_cambios)
     
     def extraer_marco(self, alto, ancho, maxancho, maxalto):
         print(alto, ancho, maxancho, maxalto)
@@ -34,15 +35,22 @@ class VentanaPrincipal(QMainWindow):
             ancho = self.imgcv_ancho
             self.spinBox_ancho.setValue(self.imgcv_ancho)
         pixmap = self.extraer_marco(alto, ancho, self.label_marco.width(), self.label_marco.height())
-        self.label_marco.clear()
         self.label_marco.setPixmap(pixmap)
+        self.pushButton_aplicar_reduccion.setEnabled(True)
 
+    def aplicar_cambios(self):
+        if self.radioButton_media.isChecked():
+            print('haciendo la media')
+        else:
+            print('haciendo la mediana')
+        self.pushButton_descargar_nuevaimg.setEnabled(True)
+        
     def leer_img(self, ruta):
         img = QPixmap(ruta)
         self.imgcv = cv2.imread(ruta)
         self.imgcv = cv2.cvtColor(self.imgcv, cv2.COLOR_BGR2RGB)
         self.imgcv_alto, self.imgcv_ancho, _ = self.imgcv.shape
-        self.label_dimensiones_original.setText(f'Alto:{self.imgcv_alto} x Ancho:{self.imgcv_ancho}')
+        self.label_dimensiones_original.setText(f'Ancho:{self.imgcv_ancho} x Alto:{self.imgcv_alto}')
         self.label_img_original.setPixmap(img)
         label_width = self.label_img_original.width()
         label_height = self.label_img_original.height()
@@ -51,7 +59,11 @@ class VentanaPrincipal(QMainWindow):
         else:
             img = img.scaledToWidth(label_width)
         self.label_img_original.setPixmap(img)
+        self.label_marco.clear()
+        self.label_img_resultante.clear()
         self.pushButton_ver_marco.setEnabled(True)
+        self.pushButton_aplicar_reduccion.setEnabled(False)
+        self.pushButton_descargar_nuevaimg.setEnabled(False)
         self.spinBox_ancho.setValue(2)
         self.spinBox_alto.setValue(2)
 

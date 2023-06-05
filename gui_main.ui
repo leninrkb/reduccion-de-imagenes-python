@@ -265,6 +265,9 @@ color: rgb(255, 255, 255);
                         <property name="text">
                          <string>Media</string>
                         </property>
+                        <property name="checked">
+                         <bool>true</bool>
+                        </property>
                        </widget>
                       </item>
                       <item>
