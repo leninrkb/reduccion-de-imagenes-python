@@ -459,7 +459,7 @@ color: rgb(255, 255, 255);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="4,3">
+         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="9,1">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -487,7 +487,20 @@ color: rgb(255, 255, 255);
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10">
+             <item>
+              <widget class="QLabel" name="label_dimensiones_resultante">
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	border: none;
+	color: rgb(255, 255, 255);
+}</string>
+               </property>
+               <property name="text">
+                <string>dimensiones</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QLabel" name="label_img_resultante">
                <property name="text">
@@ -519,23 +532,6 @@ color: rgb(255, 255, 255);
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QFrame" name="frame_10">
-               <property name="styleSheet">
-                <string notr="true">QFrame{
-		border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-}</string>
-               </property>
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <property name="frameShadow">
-                <enum>QFrame::Raised</enum>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QLineEdit" name="lineEdit_ruta_guardar">
                <property name="styleSheet">
