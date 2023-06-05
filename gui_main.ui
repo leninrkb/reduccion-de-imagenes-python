@@ -358,7 +358,7 @@ color: rgb(255, 255, 255);
                    <number>1000000</number>
                   </property>
                   <property name="singleStep">
-                   <number>5</number>
+                   <number>1</number>
                   </property>
                  </widget>
                 </item>
@@ -389,7 +389,7 @@ color: rgb(255, 255, 255);
                    <number>1000000</number>
                   </property>
                   <property name="singleStep">
-                   <number>5</number>
+                   <number>1</number>
                   </property>
                  </widget>
                 </item>
@@ -459,7 +459,7 @@ color: rgb(255, 255, 255);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="9,1">
+         <layout class="QVBoxLayout" name="verticalLayout_5" stretch="9,0,1">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -512,6 +512,21 @@ color: rgb(255, 255, 255);
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBox_ajustar_resultante">
+            <property name="styleSheet">
+             <string notr="true">QCheckBox{
+	color: rgb(255, 255, 255);
+}</string>
+            </property>
+            <property name="text">
+             <string>Ajustar imagen</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QFrame" name="frame_9">
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -532,19 +547,6 @@ color: rgb(255, 255, 255);
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QLineEdit" name="lineEdit_ruta_guardar">
-               <property name="styleSheet">
-                <string notr="true">QLineEdit{
-color:rgb(255, 255, 255);
-	border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-
-}</string>
-               </property>
-              </widget>
-             </item>
              <item>
               <widget class="QPushButton" name="pushButton_descargar_nuevaimg">
                <property name="enabled">

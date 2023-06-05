@@ -5,6 +5,7 @@ from PyQt5 import uic
 import cv2
 import numpy as np
 from statistics import mean
+import statistics
 
 class VentanaPrincipal(QMainWindow): 
     def __init__(self): 
@@ -42,13 +43,22 @@ class VentanaPrincipal(QMainWindow):
 
     def reducir_matriz(self,canal, alto_original, ancho_original, alto, ancho):
         nuevaimg = []
-        for i in range(0, alto_original - alto, alto):
-            fila = []
-            for j in range(0, ancho_original - ancho, ancho):
-                pixels = canal[i:i + alto, j:j + ancho]
-                pixel = np.mean(pixels)
-                fila.append(pixel)
-            nuevaimg.append(fila)
+        if self.radioButton_media.isChecked():
+            for i in range(0, alto_original - alto + 1, alto):
+                fila = []
+                for j in range(0, ancho_original - ancho + 1, ancho):
+                    pixels = canal[i:i + alto, j:j + ancho]
+                    pixel = np.mean(pixels)
+                    fila.append(pixel)
+                nuevaimg.append(fila)
+        else:
+            for i in range(0, alto_original - alto + 1, alto):
+                fila = []
+                for j in range(0, ancho_original - ancho + 1, ancho):
+                    pixels = canal[i:i + alto, j:j + ancho]
+                    pixel = np.median(pixels)
+                    fila.append(pixel)
+                nuevaimg.append(fila)
         nuevaimg = np.array(nuevaimg)
         nuevaimg = nuevaimg.astype(np.uint8)
         return nuevaimg
@@ -63,10 +73,29 @@ class VentanaPrincipal(QMainWindow):
         bytes_linea = channels * anchoimg
         q_image = QImage(nuevaimg.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(q_image)
-        if pixmap.height() > pixmap.width():
-            pixmap = pixmap.scaledToHeight(self.label_img_resultante.height())
-        else:
-            pixmap = pixmap.scaledToWidth(self.label_img_resultante.width())
+        if self.checkBox_ajustar_resultante.isChecked():
+            if pixmap.height() > pixmap.width():
+                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height())
+            else:
+                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width())
+        self.label_img_resultante.setPixmap(pixmap)
+        self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
+
+    def aplicar_mediana(self):
+        canalr, canalg, canalb = cv2.split(self.imgcv)
+        canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        nuevaimg = cv2.merge([canalr, canalg, canalb])
+        altoimg, anchoimg, channels = nuevaimg.shape
+        bytes_linea = channels * anchoimg
+        q_image = QImage(nuevaimg.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(q_image)
+        if self.checkBox_ajustar_resultante.isChecked():
+            if pixmap.height() > pixmap.width():
+                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height())
+            else:
+                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width())
         self.label_img_resultante.setPixmap(pixmap)
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
 
@@ -76,6 +105,7 @@ class VentanaPrincipal(QMainWindow):
             self.aplicar_media()
         else:
             print('haciendo la mediana')
+            self.aplicar_mediana()
         self.pushButton_descargar_nuevaimg.setEnabled(True)
         
     def leer_img(self, ruta):
@@ -100,7 +130,6 @@ class VentanaPrincipal(QMainWindow):
         self.spinBox_ancho.setValue(2)
         self.spinBox_alto.setValue(2)
         self.label_dimensiones_resultante.setText(f'Ancho: x Alto:')
-
 
     def seleccionar_archivo(self):
         archivo = QFileDialog()
