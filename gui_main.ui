@@ -219,6 +219,15 @@ color: rgb(255, 255, 255);
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
+                  <layout class="QGridLayout" name="gridLayout">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_marco">
+                     <property name="text">
+                      <string>TextLabel</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -273,12 +282,12 @@ color: rgb(255, 255, 255);
 }</string>
                   </property>
                   <property name="text">
-                   <string>Alto</string>
+                   <string>Ancho</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="spinBox">
+                 <widget class="QSpinBox" name="spinBox_ancho">
                   <property name="styleSheet">
                    <string notr="true">QSpinBox{
 color: rgb(255, 255, 255);
@@ -286,6 +295,9 @@ color: rgb(255, 255, 255);
                   </property>
                   <property name="minimum">
                    <number>2</number>
+                  </property>
+                  <property name="maximum">
+                   <number>1000000</number>
                   </property>
                  </widget>
                 </item>
@@ -298,12 +310,12 @@ color: rgb(255, 255, 255);
 }</string>
                   </property>
                   <property name="text">
-                   <string>Ancho</string>
+                   <string>Alto</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QSpinBox" name="spinBox_2">
+                 <widget class="QSpinBox" name="spinBox_alto">
                   <property name="styleSheet">
                    <string notr="true">QSpinBox{
 color: rgb(255, 255, 255);
@@ -311,6 +323,9 @@ color: rgb(255, 255, 255);
                   </property>
                   <property name="minimum">
                    <number>2</number>
+                  </property>
+                  <property name="maximum">
+                   <number>1000000</number>
                   </property>
                  </widget>
                 </item>
