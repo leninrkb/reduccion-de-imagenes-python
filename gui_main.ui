@@ -487,7 +487,7 @@ color: rgb(255, 255, 255);
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10">
+            <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10,1">
              <item>
               <widget class="QLabel" name="label_dimensiones_resultante">
                <property name="styleSheet">
@@ -505,6 +505,18 @@ color: rgb(255, 255, 255);
               <widget class="QLabel" name="label_img_resultante">
                <property name="text">
                 <string>imagen resultante</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_procesando">
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	color: rgb(98, 160, 234);
+}</string>
+               </property>
+               <property name="text">
+                <string>procesando imagen...</string>
                </property>
               </widget>
              </item>

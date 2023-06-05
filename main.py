@@ -4,8 +4,7 @@ from PyQt5.QtGui import QPixmap, QImage
 from PyQt5 import uic
 import cv2
 import numpy as np
-from statistics import mean
-import statistics
+import time
 
 class VentanaPrincipal(QMainWindow): 
     def __init__(self): 
@@ -14,7 +13,7 @@ class VentanaPrincipal(QMainWindow):
         self.pushButton_ver_marco.clicked.connect(self.ver_marco_reduccion)
         self.pushButton_cargar_img.clicked.connect(self.seleccionar_archivo)
         self.pushButton_aplicar_reduccion.clicked.connect(self.aplicar_cambios)
-    
+        self.label_procesando.setText('')
     def extraer_marco(self, alto, ancho, maxancho, maxalto):
         print(alto, ancho, maxancho, maxalto)
         imagen = self.imgcv[0:alto,0:ancho]
@@ -100,12 +99,18 @@ class VentanaPrincipal(QMainWindow):
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
 
     def aplicar_cambios(self):
+        self.label_procesando.setText('procesando imagen...')
+        QApplication.processEvents()
         if self.radioButton_media.isChecked():
-            print('haciendo la media')
+            inicio = time.time()  
             self.aplicar_media()
+            fin = time.time()
+            self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
         else:
-            print('haciendo la mediana')
+            inicio = time.time()
             self.aplicar_mediana()
+            fin = time.time()
+            self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
         self.pushButton_descargar_nuevaimg.setEnabled(True)
         
     def leer_img(self, ruta):
@@ -130,6 +135,8 @@ class VentanaPrincipal(QMainWindow):
         self.spinBox_ancho.setValue(2)
         self.spinBox_alto.setValue(2)
         self.label_dimensiones_resultante.setText(f'Ancho: x Alto:')
+        self.label_procesando.setText('')
+
 
     def seleccionar_archivo(self):
         archivo = QFileDialog()
