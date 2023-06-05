@@ -229,6 +229,9 @@ color: rgb(255, 255, 255);
                    </item>
                    <item>
                     <widget class="QFrame" name="frame_11">
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
                      <property name="frameShape">
                       <enum>QFrame::StyledPanel</enum>
                      </property>
@@ -238,6 +241,11 @@ color: rgb(255, 255, 255);
                      <layout class="QHBoxLayout" name="horizontalLayout_6">
                       <item>
                        <widget class="QRadioButton" name="radioButton_media">
+                        <property name="styleSheet">
+                         <string notr="true">QRadioButton{
+	color: rgb(255, 255, 255)
+}</string>
+                        </property>
                         <property name="text">
                          <string>Media</string>
                         </property>
@@ -245,6 +253,11 @@ color: rgb(255, 255, 255);
                       </item>
                       <item>
                        <widget class="QRadioButton" name="radioButton_mediana">
+                        <property name="styleSheet">
+                         <string notr="true">QRadioButton{
+	color: rgb(255, 255, 255)
+}</string>
+                        </property>
                         <property name="text">
                          <string>Mediana</string>
                         </property>
@@ -325,6 +338,9 @@ color: rgb(255, 255, 255);
                   <property name="maximum">
                    <number>1000000</number>
                   </property>
+                  <property name="singleStep">
+                   <number>5</number>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -352,6 +368,9 @@ color: rgb(255, 255, 255);
                   </property>
                   <property name="maximum">
                    <number>1000000</number>
+                  </property>
+                  <property name="singleStep">
+                   <number>5</number>
                   </property>
                  </widget>
                 </item>
