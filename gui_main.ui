@@ -219,12 +219,38 @@ color: rgb(255, 255, 255);
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QGridLayout" name="gridLayout">
-                   <item row="0" column="0">
+                  <layout class="QVBoxLayout" name="verticalLayout_9" stretch="10,2">
+                   <item>
                     <widget class="QLabel" name="label_marco">
                      <property name="text">
                       <string>TextLabel</string>
                      </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frame_11">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_6">
+                      <item>
+                       <widget class="QRadioButton" name="radioButton_media">
+                        <property name="text">
+                         <string>Media</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="radioButton_mediana">
+                        <property name="text">
+                         <string>Mediana</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
