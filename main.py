@@ -33,9 +33,9 @@ class VentanaPrincipal(QMainWindow):
         q_image = QImage(imagen.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(q_image)
         if alto > ancho:
-            pixmap = pixmap.scaledToHeight(maxalto)
+            pixmap = pixmap.scaledToHeight(maxalto - 2)
         else:
-            pixmap = pixmap.scaledToWidth(maxancho)
+            pixmap = pixmap.scaledToWidth(maxancho - 2)
         return pixmap
     
     def ver_marco_reduccion(self):
@@ -85,9 +85,9 @@ class VentanaPrincipal(QMainWindow):
         pixmap = QPixmap.fromImage(q_image)
         if self.checkBox_ajustar_resultante.isChecked():
             if pixmap.height() > pixmap.width():
-                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height())
+                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height()-2)
             else:
-                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width())
+                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width()-2)
         self.label_img_resultante.setPixmap(pixmap)
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
 
@@ -103,9 +103,9 @@ class VentanaPrincipal(QMainWindow):
         pixmap = QPixmap.fromImage(q_image)
         if self.checkBox_ajustar_resultante.isChecked():
             if pixmap.height() > pixmap.width():
-                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height())
+                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height()-2)
             else:
-                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width())
+                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width()-2)
         self.label_img_resultante.setPixmap(pixmap)
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
 
@@ -134,9 +134,9 @@ class VentanaPrincipal(QMainWindow):
         label_width = self.label_img_original.width()
         label_height = self.label_img_original.height()
         if img.height() > img.width():
-            img = img.scaledToHeight(label_height)
+            img = img.scaledToHeight(label_height-2)
         else:
-            img = img.scaledToWidth(label_width)
+            img = img.scaledToWidth(label_width-2)
         self.label_img_original.setPixmap(img)
         self.label_marco.clear()
         self.label_img_resultante.clear()
@@ -146,7 +146,7 @@ class VentanaPrincipal(QMainWindow):
         self.spinBox_ancho.setValue(2)
         self.spinBox_alto.setValue(2)
         self.label_dimensiones_resultante.setText(f'Ancho: x Alto:')
-        self.label_procesando.setText('')
+        self.label_procesando.setText('sin procesos')
 
 
     def seleccionar_archivo(self):
