@@ -42,11 +42,18 @@ class VentanaPrincipal(QMainWindow):
         self.imgcv = cv2.imread(ruta)
         self.imgcv = cv2.cvtColor(self.imgcv, cv2.COLOR_BGR2RGB)
         self.imgcv_alto, self.imgcv_ancho, _ = self.imgcv.shape
+        self.label_dimensiones_original.setText(f'Alto:{self.imgcv_alto} x Ancho:{self.imgcv_ancho}')
         self.label_img_original.setPixmap(img)
         label_width = self.label_img_original.width()
-        img = img.scaledToWidth(label_width)
+        label_height = self.label_img_original.height()
+        if img.height() > img.width():
+            img = img.scaledToHeight(label_height)
+        else:
+            img = img.scaledToWidth(label_width)
         self.label_img_original.setPixmap(img)
         self.pushButton_ver_marco.setEnabled(True)
+        self.spinBox_ancho.setValue(2)
+        self.spinBox_alto.setValue(2)
 
     def seleccionar_archivo(self):
         archivo = QFileDialog()

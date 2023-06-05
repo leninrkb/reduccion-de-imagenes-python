@@ -137,7 +137,7 @@
 }</string>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Plain</enum>
@@ -145,11 +145,27 @@
                   <property name="lineWidth">
                    <number>1</number>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_7">
+                  <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1">
+                   <item>
+                    <widget class="QLabel" name="label_dimensiones_original">
+                     <property name="styleSheet">
+                      <string notr="true">QLabel{
+	color: rgb(255, 255, 255);
+	border:none;
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>dimensiones</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item>
                     <widget class="QLabel" name="label_img_original">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
                      <property name="text">
-                      <string>TextLabel</string>
+                      <string>imagen original</string>
                      </property>
                     </widget>
                    </item>
@@ -223,7 +239,7 @@ color: rgb(255, 255, 255);
                    <item>
                     <widget class="QLabel" name="label_marco">
                      <property name="text">
-                      <string>TextLabel</string>
+                      <string>marco de reduccion</string>
                      </property>
                     </widget>
                    </item>
@@ -472,7 +488,7 @@ color: rgb(255, 255, 255);
              <item>
               <widget class="QLabel" name="label_img_resultante">
                <property name="text">
-                <string>TextLabel</string>
+                <string>imagen resultante</string>
                </property>
               </widget>
              </item>
