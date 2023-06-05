@@ -18,6 +18,7 @@ class VentanaPrincipal(QMainWindow):
         self.label_procesando.setText('sin procesos')
         self.checkBox_ajustar_resultante.setEnabled(False)
         self.checkBox_ajustar_resultante.stateChanged.connect(self.ajustar_imagen_resultante)
+        self.pushButton_descargar_nuevaimg.clicked.connect(self.descargar_img)
 
     def cambio_spin(self):
             self.label_marco.clear()
@@ -75,18 +76,13 @@ class VentanaPrincipal(QMainWindow):
         nuevaimg = nuevaimg.astype(np.uint8)
         return nuevaimg
     
-    def aplicar_media(self):
-        canalr, canalg, canalb = cv2.split(self.imgcv)
-        canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        nuevaimg = cv2.merge([canalr, canalg, canalb])
-        altoimg, anchoimg, channels = nuevaimg.shape
-        bytes_linea = channels * anchoimg
-        q_image = QImage(nuevaimg.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
-        self.pixmap_resultante = QPixmap.fromImage(q_image)
-        self.ajustar_imagen_resultante()
-        self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
+    def  descargar_img(self):
+        directorio = QFileDialog.getExistingDirectory(ventana, 'Seleccionar directorio')
+        if directorio:
+            archivo = directorio+f'/{int(time.time())}_img.jpg'
+            img = cv2.cvtColor(self.img_resultante, cv2.COLOR_BGR2RGB)
+            cv2.imwrite(archivo,img)
+            print(archivo)
 
     def ajustar_imagen_resultante(self):
         pixmap_aux = self.pixmap_resultante
@@ -96,16 +92,29 @@ class VentanaPrincipal(QMainWindow):
             else:
                 pixmap_aux = self.pixmap_resultante.scaledToWidth(self.label_img_resultante.width()-2)
         self.label_img_resultante.setPixmap(pixmap_aux)
-    
+
+    def aplicar_media(self):
+        canalr, canalg, canalb = cv2.split(self.imgcv)
+        canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        self.img_resultante = cv2.merge([canalr, canalg, canalb])
+        altoimg, anchoimg, channels = self.img_resultante.shape
+        bytes_linea = channels * anchoimg
+        q_image = QImage(self.img_resultante.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
+        self.pixmap_resultante = QPixmap.fromImage(q_image)
+        self.ajustar_imagen_resultante()
+        self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
+
     def aplicar_mediana(self):
         canalr, canalg, canalb = cv2.split(self.imgcv)
         canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
         canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
         canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        nuevaimg = cv2.merge([canalr, canalg, canalb])
-        altoimg, anchoimg, channels = nuevaimg.shape
+        self.img_resultante = cv2.merge([canalr, canalg, canalb])
+        altoimg, anchoimg, channels = self.img_resultante.shape
         bytes_linea = channels * anchoimg
-        q_image = QImage(nuevaimg.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
+        q_image = QImage(self.img_resultante.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
         self.pixmap_resultante = QPixmap.fromImage(q_image)
         self.ajustar_imagen_resultante()
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
