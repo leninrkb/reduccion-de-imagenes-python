@@ -95,7 +95,7 @@ class VentanaPrincipal(QMainWindow):
         q_image = QImage(self.img_resultante.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
         self.pixmap_resultante = QPixmap.fromImage(q_image)
         self.ajustar_imagen_resultante()
-        self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
+        self.label_dimensiones_resultante.setText(f'Media - Ancho:{anchoimg} x Alto:{altoimg}')
 
     def aplicar_mediana(self):
         canalr, canalg, canalb = cv2.split(self.imgcv)
@@ -108,7 +108,7 @@ class VentanaPrincipal(QMainWindow):
         q_image = QImage(self.img_resultante.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
         self.pixmap_resultante = QPixmap.fromImage(q_image)
         self.ajustar_imagen_resultante()
-        self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
+        self.label_dimensiones_resultante.setText(f'Mediana - Ancho:{anchoimg} x Alto:{altoimg}')
 
     def aplicar_cambios(self):
         self.label_procesando.setText('procesando imagen...')
