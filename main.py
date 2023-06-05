@@ -4,6 +4,7 @@ from PyQt5 import uic
 import cv2
 import numpy as np
 import time
+import os
 
 class VentanaPrincipal(QMainWindow): 
     def __init__(self): 
@@ -53,18 +54,47 @@ class VentanaPrincipal(QMainWindow):
         self.label_marco.setPixmap(pixmap)
         self.pushButton_aplicar_reduccion.setEnabled(True)
 
-    def reducir_matriz(self,canal, alto_original, ancho_original, alto, ancho):
-        nuevaimg = []
-        for i in range(0, alto_original - alto + 1, alto):
-            fila = []
-            for j in range(0, ancho_original - ancho + 1, ancho):
-                pixels = canal[i:i + alto, j:j + ancho]
-                pixel = np.mean(pixels) if self.radioButton_media.isChecked() else np.median(pixels)
-                fila.append(pixel)
-            nuevaimg.append(fila)
-        nuevaimg = np.array(nuevaimg)
-        nuevaimg = nuevaimg.astype(np.uint8)
-        return nuevaimg
+    def reducir_matriz(self,img, alto_original, ancho_original, alto, ancho):
+        canalr, canalg, canalb = cv2.split(img)
+        nuevo_canal_r = []
+        nuevo_canal_g = []
+        nuevo_canal_b = []
+        t = 0
+        pxs = (alto_original/alto) * (ancho_original/ancho)
+        for i in range(0, alto_original - alto, alto):
+            fila_r = []
+            fila_g = []
+            fila_b = []
+            for j in range(0, ancho_original - ancho, ancho):
+                t+=1
+                print(f'{t} de {pxs}')
+                pixels_r = canalr[i:i + alto, j:j + ancho]
+                pixels_g = canalg[i:i + alto, j:j + ancho]
+                pixels_b = canalb[i:i + alto, j:j + ancho]
+                if self.radioButton_media.isChecked():
+                    pixel_r = np.mean(pixels_r)
+                    pixel_g = np.mean(pixels_g)
+                    pixel_b = np.mean(pixels_b)
+                else:
+                    pixel_r = np.median(pixels_r)
+                    pixel_g = np.median(pixels_g)
+                    pixel_b = np.median(pixels_b)
+                fila_r.append(pixel_r)
+                fila_g.append(pixel_g)
+                fila_b.append(pixel_b)
+            t+=1
+            print(f'{t} de {pxs}')
+            nuevo_canal_r.append(fila_r)
+            nuevo_canal_g.append(fila_g)
+            nuevo_canal_b.append(fila_b)
+        print('terminado')
+        nuevo_canal_r = np.array(nuevo_canal_r)
+        nuevo_canal_g = np.array(nuevo_canal_g)
+        nuevo_canal_b = np.array(nuevo_canal_b)
+        nuevo_canal_r = nuevo_canal_r.astype(np.uint8)
+        nuevo_canal_g = nuevo_canal_g.astype(np.uint8)
+        nuevo_canal_b = nuevo_canal_b.astype(np.uint8)
+        return nuevo_canal_r, nuevo_canal_g, nuevo_canal_b
     
     def  descargar_img(self):
         directorio = QFileDialog.getExistingDirectory(ventana, 'Seleccionar directorio')
@@ -85,10 +115,12 @@ class VentanaPrincipal(QMainWindow):
         self.label_img_resultante.setPixmap(pixmap_aux)
 
     def aplicar_media(self):
-        canalr, canalg, canalb = cv2.split(self.imgcv)
-        canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        # canalr, canalg, canalb = cv2.split(self.imgcv)
+        # canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        # canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        # canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        canalr, canalg, canalb = self.reducir_matriz(self.imgcv, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        
         self.img_resultante = cv2.merge([canalr, canalg, canalb])
         altoimg, anchoimg, channels = self.img_resultante.shape
         bytes_linea = channels * anchoimg
@@ -98,10 +130,7 @@ class VentanaPrincipal(QMainWindow):
         self.label_dimensiones_resultante.setText(f'Media - Ancho:{anchoimg} x Alto:{altoimg}')
 
     def aplicar_mediana(self):
-        canalr, canalg, canalb = cv2.split(self.imgcv)
-        canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
+        canalr, canalg, canalb = self.reducir_matriz(self.imgcv, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
         self.img_resultante = cv2.merge([canalr, canalg, canalb])
         altoimg, anchoimg, channels = self.img_resultante.shape
         bytes_linea = channels * anchoimg
@@ -128,8 +157,10 @@ class VentanaPrincipal(QMainWindow):
 
         
     def leer_img(self, ruta):
-        img = QPixmap(ruta)
-        self.imgcv = cv2.imread(ruta)
+        ruta_absoluta = os.path.abspath(ruta)
+        ruta_normalizada = os.path.normpath(ruta_absoluta)
+        img = QPixmap(ruta_normalizada)
+        self.imgcv = cv2.imread(ruta_normalizada)
         self.imgcv = cv2.cvtColor(self.imgcv, cv2.COLOR_BGR2RGB)
         self.imgcv_alto, self.imgcv_ancho, _ = self.imgcv.shape
         self.label_dimensiones_original.setText(f'Ancho:{self.imgcv_ancho} x Alto:{self.imgcv_alto}')
@@ -158,7 +189,8 @@ class VentanaPrincipal(QMainWindow):
         archivo.setFileMode(QFileDialog.ExistingFile)
         if archivo.exec_():
             ruta = archivo.selectedFiles()
-            self.leer_img(ruta[0])
+            ruta = ruta[0]
+            self.leer_img(ruta)
 
 app = QApplication([])
 ventana = VentanaPrincipal()
