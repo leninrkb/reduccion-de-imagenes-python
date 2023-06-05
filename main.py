@@ -16,6 +16,8 @@ class VentanaPrincipal(QMainWindow):
         self.spinBox_ancho.valueChanged.connect(self.cambio_spin)
         self.spinBox_alto.valueChanged.connect(self.cambio_spin)
         self.label_procesando.setText('sin procesos')
+        self.checkBox_ajustar_resultante.setEnabled(False)
+        self.checkBox_ajustar_resultante.stateChanged.connect(self.ajustar_imagen_resultante)
 
     def cambio_spin(self):
             self.label_marco.clear()
@@ -23,7 +25,7 @@ class VentanaPrincipal(QMainWindow):
             self.pushButton_aplicar_reduccion.setEnabled(False)
             self.pushButton_descargar_nuevaimg.setEnabled(False)
             self.label_procesando.setText('sin procesos')
-
+            self.checkBox_ajustar_resultante.setEnabled(False)
 
     def extraer_marco(self, alto, ancho, maxancho, maxalto):
         print(alto, ancho, maxancho, maxalto)
@@ -82,15 +84,19 @@ class VentanaPrincipal(QMainWindow):
         altoimg, anchoimg, channels = nuevaimg.shape
         bytes_linea = channels * anchoimg
         q_image = QImage(nuevaimg.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
-        pixmap = QPixmap.fromImage(q_image)
-        if self.checkBox_ajustar_resultante.isChecked():
-            if pixmap.height() > pixmap.width():
-                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height()-2)
-            else:
-                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width()-2)
-        self.label_img_resultante.setPixmap(pixmap)
+        self.pixmap_resultante = QPixmap.fromImage(q_image)
+        self.ajustar_imagen_resultante()
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
 
+    def ajustar_imagen_resultante(self):
+        pixmap_aux = self.pixmap_resultante
+        if self.checkBox_ajustar_resultante.isChecked():
+            if self.pixmap_resultante.height() > self.pixmap_resultante.width():
+                pixmap_aux = self.pixmap_resultante.scaledToHeight(self.label_img_resultante.height()-2)
+            else:
+                pixmap_aux = self.pixmap_resultante.scaledToWidth(self.label_img_resultante.width()-2)
+        self.label_img_resultante.setPixmap(pixmap_aux)
+    
     def aplicar_mediana(self):
         canalr, canalg, canalb = cv2.split(self.imgcv)
         canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
@@ -100,13 +106,8 @@ class VentanaPrincipal(QMainWindow):
         altoimg, anchoimg, channels = nuevaimg.shape
         bytes_linea = channels * anchoimg
         q_image = QImage(nuevaimg.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
-        pixmap = QPixmap.fromImage(q_image)
-        if self.checkBox_ajustar_resultante.isChecked():
-            if pixmap.height() > pixmap.width():
-                pixmap = pixmap.scaledToHeight(self.label_img_resultante.height()-2)
-            else:
-                pixmap = pixmap.scaledToWidth(self.label_img_resultante.width()-2)
-        self.label_img_resultante.setPixmap(pixmap)
+        self.pixmap_resultante = QPixmap.fromImage(q_image)
+        self.ajustar_imagen_resultante()
         self.label_dimensiones_resultante.setText(f'Ancho:{anchoimg} x Alto:{altoimg}')
 
     def aplicar_cambios(self):
@@ -123,6 +124,8 @@ class VentanaPrincipal(QMainWindow):
             fin = time.time()
             self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
         self.pushButton_descargar_nuevaimg.setEnabled(True)
+        self.checkBox_ajustar_resultante.setEnabled(True)
+
         
     def leer_img(self, ruta):
         img = QPixmap(ruta)
