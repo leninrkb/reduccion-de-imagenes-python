@@ -1,4 +1,3 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QApplication, QMainWindow
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5 import uic
@@ -76,6 +75,7 @@ class VentanaPrincipal(QMainWindow):
             self.label_procesando.setText(f'imagen descargada en {directorio}')
 
     def ajustar_imagen_resultante(self):
+        self.label_img_resultante.clear()
         pixmap_aux = self.pixmap_resultante
         if self.checkBox_ajustar_resultante.isChecked():
             if self.pixmap_resultante.height() > self.pixmap_resultante.width():
