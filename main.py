@@ -26,6 +26,7 @@ class VentanaPrincipal(QMainWindow):
         self.label_img_resultante.clear()
         self.label_procesando.setText('procesando imagen...')
         self.label_dimensiones_resultante.setText('procesando imagen...')
+        self.frame_radio_opciones.setEnabled(False)
         self.pushButton_cargar_img.setEnabled(False)
         self.spinBox_ancho.setEnabled(False)
         self.spinBox_alto.setEnabled(False)
@@ -39,6 +40,7 @@ class VentanaPrincipal(QMainWindow):
         self.pushButton_cargar_img.setEnabled(True)
         self.spinBox_ancho.setEnabled(True)
         self.spinBox_alto.setEnabled(True)
+        self.frame_radio_opciones.setEnabled(True)
         self.pushButton_ver_marco.setEnabled(True)
         self.pushButton_aplicar_reduccion.setEnabled(True)
         self.checkBox_ajustar_resultante.setEnabled(True)
@@ -159,7 +161,6 @@ class VentanaPrincipal(QMainWindow):
         self.fin_modo_aplicar_cambios()
         self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
 
-        
     def leer_img(self, ruta):
         ruta_absoluta = os.path.abspath(ruta)
         ruta_normalizada = os.path.normpath(ruta_absoluta)
@@ -181,8 +182,8 @@ class VentanaPrincipal(QMainWindow):
         self.pushButton_ver_marco.setEnabled(True)
         self.pushButton_aplicar_reduccion.setEnabled(False)
         self.pushButton_descargar_nuevaimg.setEnabled(False)
-        self.spinBox_ancho.setValue(2)
-        self.spinBox_alto.setValue(2)
+        self.spinBox_ancho.setValue(1)
+        self.spinBox_alto.setValue(1)
         self.label_dimensiones_resultante.setText(f'Ancho: x Alto:')
         self.label_procesando.setText('sin procesos')
 

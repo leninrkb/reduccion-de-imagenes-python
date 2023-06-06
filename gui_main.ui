@@ -14,21 +14,14 @@
    <string>Reduccion de imagenes</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow{
-	background-color: rgb(26, 95, 180);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">QWidget{
-	
-	
-	background-color: rgb(33, 33, 33);
-	background-color: rgb(58, 58, 58);
-}</string>
+    <string notr="true"/>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
@@ -130,11 +123,7 @@
                 <item>
                  <widget class="QFrame" name="frame_img">
                   <property name="styleSheet">
-                   <string notr="true">QFrame{
-	border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
@@ -146,13 +135,22 @@
                    <number>1</number>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
                    <item>
                     <widget class="QLabel" name="label_dimensiones_original">
                      <property name="styleSheet">
-                      <string notr="true">QLabel{
-	color: rgb(255, 255, 255);
-	border:none;
-}</string>
+                      <string notr="true"/>
                      </property>
                      <property name="text">
                       <string>dimensiones</string>
@@ -165,7 +163,7 @@
                       <enum>QFrame::StyledPanel</enum>
                      </property>
                      <property name="text">
-                      <string>imagen original</string>
+                      <string/>
                      </property>
                     </widget>
                    </item>
@@ -175,9 +173,7 @@
                 <item>
                  <widget class="QPushButton" name="pushButton_cargar_img">
                   <property name="styleSheet">
-                   <string notr="true">QPushButton{
-color: rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Cargar imagen</string>
@@ -211,9 +207,7 @@ color: rgb(255, 255, 255);
                 <item>
                  <widget class="QLabel" name="label">
                   <property name="styleSheet">
-                   <string notr="true">QLabel{
-	color: rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Marco de reduccion por aplicar:</string>
@@ -223,28 +217,39 @@ color: rgb(255, 255, 255);
                 <item>
                  <widget class="QFrame" name="frame_preview_reduccion">
                   <property name="styleSheet">
-                   <string notr="true">QFrame{
-	border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
+                   <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_9" stretch="10,2">
+                  <layout class="QVBoxLayout" name="verticalLayout_9" stretch="10,1">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
                    <item>
                     <widget class="QLabel" name="label_marco">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
                      <property name="text">
-                      <string>marco de reduccion</string>
+                      <string/>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="frame_11">
+                    <widget class="QFrame" name="frame_radio_opciones">
                      <property name="styleSheet">
                       <string notr="true"/>
                      </property>
@@ -255,12 +260,19 @@ color: rgb(255, 255, 255);
                       <enum>QFrame::Raised</enum>
                      </property>
                      <layout class="QHBoxLayout" name="horizontalLayout_6">
+                      <property name="leftMargin">
+                       <number>10</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
                       <item>
                        <widget class="QRadioButton" name="radioButton_media">
                         <property name="styleSheet">
-                         <string notr="true">QRadioButton{
-	color: rgb(255, 255, 255)
-}</string>
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string>Media</string>
@@ -273,9 +285,7 @@ color: rgb(255, 255, 255);
                       <item>
                        <widget class="QRadioButton" name="radioButton_mediana">
                         <property name="styleSheet">
-                         <string notr="true">QRadioButton{
-	color: rgb(255, 255, 255)
-}</string>
+                         <string notr="true"/>
                         </property>
                         <property name="text">
                          <string>Mediana</string>
@@ -318,11 +328,7 @@ color: rgb(255, 255, 255);
              <item>
               <widget class="QFrame" name="frame_6">
                <property name="styleSheet">
-                <string notr="true">QFrame{
-		border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-}</string>
+                <string notr="true"/>
                </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
@@ -334,10 +340,7 @@ color: rgb(255, 255, 255);
                 <item>
                  <widget class="QLabel" name="label_2">
                   <property name="styleSheet">
-                   <string notr="true">QLabel{
-	color: rgb(255, 255, 255);
-	border: none; 
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Ancho</string>
@@ -347,12 +350,10 @@ color: rgb(255, 255, 255);
                 <item>
                  <widget class="QSpinBox" name="spinBox_ancho">
                   <property name="styleSheet">
-                   <string notr="true">QSpinBox{
-color: rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="minimum">
-                   <number>2</number>
+                   <number>1</number>
                   </property>
                   <property name="maximum">
                    <number>1000000</number>
@@ -360,15 +361,15 @@ color: rgb(255, 255, 255);
                   <property name="singleStep">
                    <number>1</number>
                   </property>
+                  <property name="value">
+                   <number>1</number>
+                  </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_4">
                   <property name="styleSheet">
-                   <string notr="true">QLabel{
-	color: rgb(255, 255, 255);
-	border: none; 
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Alto</string>
@@ -378,17 +379,18 @@ color: rgb(255, 255, 255);
                 <item>
                  <widget class="QSpinBox" name="spinBox_alto">
                   <property name="styleSheet">
-                   <string notr="true">QSpinBox{
-color: rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="minimum">
-                   <number>2</number>
+                   <number>1</number>
                   </property>
                   <property name="maximum">
                    <number>1000000</number>
                   </property>
                   <property name="singleStep">
+                   <number>1</number>
+                  </property>
+                  <property name="value">
                    <number>1</number>
                   </property>
                  </widget>
@@ -399,11 +401,7 @@ color: rgb(255, 255, 255);
              <item>
               <widget class="QFrame" name="frame_7">
                <property name="styleSheet">
-                <string notr="true">QFrame{
-		border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-}</string>
+                <string notr="true"/>
                </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
@@ -418,9 +416,7 @@ color: rgb(255, 255, 255);
                    <bool>false</bool>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QPushButton{
-color: rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Ver marco</string>
@@ -433,9 +429,7 @@ color: rgb(255, 255, 255);
                    <bool>false</bool>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QPushButton{
-color: rgb(255, 255, 255);
-}</string>
+                   <string notr="true"/>
                   </property>
                   <property name="text">
                    <string>Aplicar reduccion</string>
@@ -475,26 +469,31 @@ color: rgb(255, 255, 255);
           <item>
            <widget class="QFrame" name="frame_8">
             <property name="styleSheet">
-             <string notr="true">QFrame{
-		border: 1px solid; 
-	border-color: gray;
-	border-radius: 8px;
-}</string>
+             <string notr="true"/>
             </property>
             <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+             <enum>QFrame::NoFrame</enum>
             </property>
             <property name="frameShadow">
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,10,1">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="label_dimensiones_resultante">
                <property name="styleSheet">
-                <string notr="true">QLabel{
-	border: none;
-	color: rgb(255, 255, 255);
-}</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string>dimensiones</string>
@@ -503,20 +502,24 @@ color: rgb(255, 255, 255);
              </item>
              <item>
               <widget class="QLabel" name="label_img_resultante">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
                <property name="text">
-                <string>imagen resultante</string>
+                <string/>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QLabel" name="label_procesando">
                <property name="styleSheet">
-                <string notr="true">QLabel{
-	color: rgb(98, 160, 234);
-}</string>
+                <string notr="true"/>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
                </property>
                <property name="text">
-                <string>procesando imagen...</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -526,9 +529,7 @@ color: rgb(255, 255, 255);
           <item>
            <widget class="QCheckBox" name="checkBox_ajustar_resultante">
             <property name="styleSheet">
-             <string notr="true">QCheckBox{
-	color: rgb(255, 255, 255);
-}</string>
+             <string notr="true"/>
             </property>
             <property name="text">
              <string>Ajustar imagen</string>
@@ -565,9 +566,7 @@ color: rgb(255, 255, 255);
                 <bool>false</bool>
                </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton{
-color: rgb(255, 255, 255);
-}</string>
+                <string notr="true"/>
                </property>
                <property name="text">
                 <string>Descargar nueva imagen</string>
