@@ -105,7 +105,6 @@ class VentanaPrincipal(QMainWindow):
             self.label_procesando.setText(f'imagen descargada en {directorio}')
 
     def ajustar_imagen_resultante(self):
-        self.label_img_resultante.clear()
         pixmap_aux = self.pixmap_resultante
         if self.checkBox_ajustar_resultante.isChecked():
             if self.pixmap_resultante.height() > self.pixmap_resultante.width():
@@ -115,12 +114,7 @@ class VentanaPrincipal(QMainWindow):
         self.label_img_resultante.setPixmap(pixmap_aux)
 
     def aplicar_media(self):
-        # canalr, canalg, canalb = cv2.split(self.imgcv)
-        # canalr = self.reducir_matriz(canalr, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        # canalg = self.reducir_matriz(canalg, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        # canalb = self.reducir_matriz(canalb, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
         canalr, canalg, canalb = self.reducir_matriz(self.imgcv, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        
         self.img_resultante = cv2.merge([canalr, canalg, canalb])
         altoimg, anchoimg, channels = self.img_resultante.shape
         bytes_linea = channels * anchoimg
@@ -140,6 +134,7 @@ class VentanaPrincipal(QMainWindow):
         self.label_dimensiones_resultante.setText(f'Mediana - Ancho:{anchoimg} x Alto:{altoimg}')
 
     def aplicar_cambios(self):
+        self.label_img_resultante.clear()
         self.label_procesando.setText('procesando imagen...')
         QApplication.processEvents()
         if self.radioButton_media.isChecked():
@@ -181,7 +176,6 @@ class VentanaPrincipal(QMainWindow):
         self.spinBox_alto.setValue(2)
         self.label_dimensiones_resultante.setText(f'Ancho: x Alto:')
         self.label_procesando.setText('sin procesos')
-
 
     def seleccionar_archivo(self):
         archivo = QFileDialog()
