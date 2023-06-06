@@ -15,26 +15,60 @@ class VentanaPrincipal(QMainWindow):
         self.pushButton_aplicar_reduccion.clicked.connect(self.aplicar_cambios)
         self.spinBox_ancho.valueChanged.connect(self.cambio_spin)
         self.spinBox_alto.valueChanged.connect(self.cambio_spin)
+        self.radioButton_media.toggled.connect(self.cambio_radio)
+        self.radioButton_mediana.toggled.connect(self.cambio_radio)
         self.label_procesando.setText('sin procesos')
         self.checkBox_ajustar_resultante.setEnabled(False)
         self.checkBox_ajustar_resultante.stateChanged.connect(self.ajustar_imagen_resultante)
         self.pushButton_descargar_nuevaimg.clicked.connect(self.descargar_img)
 
-    def cambio_spin(self):
-            self.label_marco.clear()
-            self.label_img_resultante.clear()
-            self.pushButton_aplicar_reduccion.setEnabled(False)
-            self.pushButton_descargar_nuevaimg.setEnabled(False)
-            self.label_procesando.setText('sin procesos')
-            self.checkBox_ajustar_resultante.setEnabled(False)
+    def modo_aplicar_cambios(self):
+        self.label_img_resultante.clear()
+        self.label_procesando.setText('procesando imagen...')
+        self.label_dimensiones_resultante.setText('procesando imagen...')
+        self.pushButton_cargar_img.setEnabled(False)
+        self.spinBox_ancho.setEnabled(False)
+        self.spinBox_alto.setEnabled(False)
+        self.pushButton_ver_marco.setEnabled(False)
+        self.pushButton_aplicar_reduccion.setEnabled(False)
+        self.checkBox_ajustar_resultante.setEnabled(False)
+        self.pushButton_descargar_nuevaimg.setEnabled(False)
+        QApplication.processEvents()
 
-    def extraer_marco(self, alto, ancho, maxancho, maxalto):
-        print(alto, ancho, maxancho, maxalto)
-        imagen = self.imgcv[0:alto,0:ancho]
-        altoimg, anchoimg, channels = imagen.shape
+    def fin_modo_aplicar_cambios(self):
+        self.pushButton_cargar_img.setEnabled(True)
+        self.spinBox_ancho.setEnabled(True)
+        self.spinBox_alto.setEnabled(True)
+        self.pushButton_ver_marco.setEnabled(True)
+        self.pushButton_aplicar_reduccion.setEnabled(True)
+        self.checkBox_ajustar_resultante.setEnabled(True)
+        self.pushButton_descargar_nuevaimg.setEnabled(True)
+
+    def cambio_radio(self):
+        self.label_img_resultante.clear()
+        self.pushButton_descargar_nuevaimg.setEnabled(False)
+        self.label_procesando.setText('sin procesos')
+        self.checkBox_ajustar_resultante.setEnabled(False)
+
+    def cambio_spin(self):
+        self.label_marco.clear()
+        self.label_img_resultante.clear()
+        self.pushButton_aplicar_reduccion.setEnabled(False)
+        self.pushButton_descargar_nuevaimg.setEnabled(False)
+        self.label_procesando.setText('sin procesos')
+        self.label_dimensiones_resultante.setText('sin procesos')
+        self.checkBox_ajustar_resultante.setEnabled(False)
+    
+    def imgcv2pixmap(self, img):
+        altoimg, anchoimg, channels = img.shape
         bytes_linea = channels * anchoimg
-        q_image = QImage(imagen.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
+        q_image = QImage(img.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(q_image)
+        return pixmap
+    
+    def extraer_marco(self, alto, ancho, maxancho, maxalto):
+        imagen = self.imgcv[0:alto,0:ancho]
+        pixmap = self.imgcv2pixmap(imagen)
         if alto > ancho:
             pixmap = pixmap.scaledToHeight(maxalto - 2)
         else:
@@ -61,11 +95,11 @@ class VentanaPrincipal(QMainWindow):
         nuevo_canal_b = []
         t = 0
         pxs = (alto_original/alto) * (ancho_original/ancho)
-        for i in range(0, alto_original - alto, alto):
+        for i in range(0, alto_original - alto + 1, alto):
             fila_r = []
             fila_g = []
             fila_b = []
-            for j in range(0, ancho_original - ancho, ancho):
+            for j in range(0, ancho_original - ancho + 1, ancho):
                 t+=1
                 print(f'{t} de {pxs}')
                 pixels_r = canalr[i:i + alto, j:j + ancho]
@@ -99,7 +133,9 @@ class VentanaPrincipal(QMainWindow):
     def  descargar_img(self):
         directorio = QFileDialog.getExistingDirectory(ventana, 'Seleccionar directorio')
         if directorio:
-            archivo = directorio+f'/{int(time.time())}_img.jpg'
+            idtiempo = int(time.time())
+            titulo = f'/{idtiempo}_media_img.jpg' if self.radioButton_media.isChecked() else  f'/{idtiempo}_mediana_img.jpg'
+            archivo = directorio + titulo
             img = cv2.cvtColor(self.img_resultante, cv2.COLOR_BGR2RGB)
             cv2.imwrite(archivo,img)
             self.label_procesando.setText(f'imagen descargada en {directorio}')
@@ -113,42 +149,21 @@ class VentanaPrincipal(QMainWindow):
                 pixmap_aux = self.pixmap_resultante.scaledToWidth(self.label_img_resultante.width()-2)
         self.label_img_resultante.setPixmap(pixmap_aux)
 
-    def aplicar_media(self):
+    def aplicar_media_mediana(self):
         canalr, canalg, canalb = self.reducir_matriz(self.imgcv, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
         self.img_resultante = cv2.merge([canalr, canalg, canalb])
-        altoimg, anchoimg, channels = self.img_resultante.shape
-        bytes_linea = channels * anchoimg
-        q_image = QImage(self.img_resultante.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
-        self.pixmap_resultante = QPixmap.fromImage(q_image)
+        self.pixmap_resultante = self.imgcv2pixmap(self.img_resultante)
         self.ajustar_imagen_resultante()
-        self.label_dimensiones_resultante.setText(f'Media - Ancho:{anchoimg} x Alto:{altoimg}')
-
-    def aplicar_mediana(self):
-        canalr, canalg, canalb = self.reducir_matriz(self.imgcv, self.imgcv_alto, self.imgcv_ancho, self.alto, self.ancho)
-        self.img_resultante = cv2.merge([canalr, canalg, canalb])
-        altoimg, anchoimg, channels = self.img_resultante.shape
-        bytes_linea = channels * anchoimg
-        q_image = QImage(self.img_resultante.data.tobytes(), anchoimg, altoimg, bytes_linea, QImage.Format_RGB888)
-        self.pixmap_resultante = QPixmap.fromImage(q_image)
-        self.ajustar_imagen_resultante()
-        self.label_dimensiones_resultante.setText(f'Mediana - Ancho:{anchoimg} x Alto:{altoimg}')
+        opcion = 'Media' if self.radioButton_media.isChecked() else 'Mediana'
+        self.label_dimensiones_resultante.setText(f'{opcion} - Ancho:{self.pixmap_resultante.width()} x Alto:{self.pixmap_resultante.height()}')
 
     def aplicar_cambios(self):
-        self.label_img_resultante.clear()
-        self.label_procesando.setText('procesando imagen...')
-        QApplication.processEvents()
-        if self.radioButton_media.isChecked():
-            inicio = time.time()  
-            self.aplicar_media()
-            fin = time.time()
-            self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
-        else:
-            inicio = time.time()
-            self.aplicar_mediana()
-            fin = time.time()
-            self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
-        self.pushButton_descargar_nuevaimg.setEnabled(True)
-        self.checkBox_ajustar_resultante.setEnabled(True)
+        self.modo_aplicar_cambios()
+        inicio = time.time()  
+        self.aplicar_media_mediana()
+        fin = time.time()
+        self.fin_modo_aplicar_cambios()
+        self.label_procesando.setText(f'ejecutado en:{int(fin - inicio)} s')
 
         
     def leer_img(self, ruta):
