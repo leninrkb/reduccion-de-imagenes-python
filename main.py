@@ -93,15 +93,11 @@ class VentanaPrincipal(QMainWindow):
         nuevo_canal_r = []
         nuevo_canal_g = []
         nuevo_canal_b = []
-        t = 0
-        pxs = (alto_original/alto) * (ancho_original/ancho)
         for i in range(0, alto_original - alto + 1, alto):
             fila_r = []
             fila_g = []
             fila_b = []
             for j in range(0, ancho_original - ancho + 1, ancho):
-                t+=1
-                print(f'{t} de {pxs}')
                 pixels_r = canalr[i:i + alto, j:j + ancho]
                 pixels_g = canalg[i:i + alto, j:j + ancho]
                 pixels_b = canalb[i:i + alto, j:j + ancho]
@@ -116,8 +112,6 @@ class VentanaPrincipal(QMainWindow):
                 fila_r.append(pixel_r)
                 fila_g.append(pixel_g)
                 fila_b.append(pixel_b)
-            t+=1
-            print(f'{t} de {pxs}')
             nuevo_canal_r.append(fila_r)
             nuevo_canal_g.append(fila_g)
             nuevo_canal_b.append(fila_b)
