@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QFileDialog, QApplication, QMainWindow
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5 import uic
-import cv2
+import cv2 
 import numpy as np
 import time
 import os
@@ -117,10 +117,11 @@ class VentanaPrincipal(QMainWindow):
             nuevo_canal_r.append(fila_r)
             nuevo_canal_g.append(fila_g)
             nuevo_canal_b.append(fila_b)
-        print('terminado')
+
         nuevo_canal_r = np.array(nuevo_canal_r)
         nuevo_canal_g = np.array(nuevo_canal_g)
         nuevo_canal_b = np.array(nuevo_canal_b)
+
         nuevo_canal_r = nuevo_canal_r.astype(np.uint8)
         nuevo_canal_g = nuevo_canal_g.astype(np.uint8)
         nuevo_canal_b = nuevo_canal_b.astype(np.uint8)
@@ -164,19 +165,27 @@ class VentanaPrincipal(QMainWindow):
     def leer_img(self, ruta):
         ruta_absoluta = os.path.abspath(ruta)
         ruta_normalizada = os.path.normpath(ruta_absoluta)
+
         img = QPixmap(ruta_normalizada)
         self.imgcv = cv2.imread(ruta_normalizada)
+
         self.imgcv = cv2.cvtColor(self.imgcv, cv2.COLOR_BGR2RGB)
+
         self.imgcv_alto, self.imgcv_ancho, _ = self.imgcv.shape
+
         self.label_dimensiones_original.setText(f'Ancho:{self.imgcv_ancho} x Alto:{self.imgcv_alto}')
+
         self.label_img_original.setPixmap(img)
+
         label_width = self.label_img_original.width()
         label_height = self.label_img_original.height()
         if img.height() > img.width():
             img = img.scaledToHeight(label_height-2)
         else:
             img = img.scaledToWidth(label_width-2)
+
         self.label_img_original.setPixmap(img)
+
         self.label_marco.clear()
         self.label_img_resultante.clear()
         self.pushButton_ver_marco.setEnabled(True)
